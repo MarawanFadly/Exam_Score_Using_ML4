@@ -9,15 +9,25 @@ model= joblib.load("../artifacts/svm_pipeline.pkl")
 
 st.set_page_config( 'Exam Score Prediction', ':book:', 'wide' )
 
-st.markdown( '<h1 style = "font-size:50px;color:orange;font-family:times new roman;" >Exam Score Prediction using ML</h1>', unsafe_allow_html=True )
+#### Setting a background color to a streamlit page
+
+st.markdown("""
+<style>
+[data-testid="stAppViewContainer"] {
+    background-color: #9ddf93; 
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown( '<h1 style ="font-size:50px;color:white;background-color:brown;text-align:center;font-family:times new roman;" >Exam Score Prediction using ML</h1>', unsafe_allow_html=True )
 
 df=pd.read_csv('../data/feature eng data/feature_eng_data.csv')
-
 
 box_11, box_12, box_13, box_14 =   st.columns( 4 )
 
 # Row 1
-gender = box_11.selectbox( 'Gender',
+
+gender = box_11.selectbox( 'gender',
              options = df['gender'].unique())
 
 course = box_12.selectbox( 'Course',
@@ -71,6 +81,5 @@ columns = [
     'exam_score',
     'course_diff'
 ]
-
 data=pd.DataFrame(columns=columns)
 st.dataframe(data)
