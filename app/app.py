@@ -2,9 +2,9 @@ import os
 import numpy as np
 import pandas as pd
 import streamlit as st      # streamlit run app/app.py
-import joblib
+import joblib 
 import pickle
-from pathlib import Path
+
 
 model= joblib.load('./artifacts/svm_pipeline.pkl')
 
