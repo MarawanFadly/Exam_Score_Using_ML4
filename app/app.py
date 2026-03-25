@@ -5,7 +5,7 @@ import streamlit as st      # streamlit run app/app.py
 import joblib
 import pickle
 
-model= joblib.load("../artifacts/svm_pipeline.pkl")
+model= joblib.load("./artifacts/svm_pipeline.pkl")
 
 st.set_page_config( 'Exam Score Prediction', ':book:', 'wide' )
 
