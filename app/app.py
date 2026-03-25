@@ -6,7 +6,7 @@ import joblib
 import pickle
 
 
-model= joblib.load('./artifacts/svm_pipeline.pkl')
+#model= joblib.load("../app/artifacts/svm_pipeline.pkl")
 
 st.set_page_config( 'Exam Score Prediction', ':book:', 'wide' )
 
@@ -112,8 +112,6 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-
-# ✅ Create two columns for buttons
 col1, col2 = st.columns(2)
 
 with col1:
