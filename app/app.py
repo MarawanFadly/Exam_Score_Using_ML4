@@ -22,7 +22,7 @@ st.markdown("""
 
 st.markdown( '<h1 style ="font-size:50px;color:white;background-color:brown;text-align:center;font-family:times new roman;" >Exam Score Prediction using ML</h1>', unsafe_allow_html=True )
 
-df=pd.read_csv('../data/feature eng data/feature_eng_data.csv')
+df=pd.read_csv('./data/feature eng data/feature_eng_data.csv')
 
 box_11, box_12, box_13, box_14 =   st.columns( 4 )
 
