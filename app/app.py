@@ -60,7 +60,7 @@ study_method = box_24.selectbox( 'study_method',
 
 # Row 3
 
-box_31, box_32 =   st.columns( 2 )
+box_31, box_32, box_33 =   st.columns( 3 )
 
 facility_rating = box_31.selectbox( 'facility_rating',
           options = df['facility_rating'].unique())
@@ -68,18 +68,60 @@ facility_rating = box_31.selectbox( 'facility_rating',
 exam_difficulty = box_32.selectbox( 'exam_difficulty',
           options = df['exam_difficulty'].unique())
 
-# st.write( gender, course, study_hours, class_attendance )         # Just for test !
+exam_score=box_33.slider( 'exam_score',
+              min_value= df['exam_score'].min(),
+              max_value= df['exam_score'].max())
 
-columns = [
-    'index',
-    'study_hours',
-    'class_attendance',
-    'sleep_hours',
-    'sleep_quality',
-    'facility_rating',
-    'exam_difficulty',
-    'exam_score',
-    'course_diff'
-]
-data=pd.DataFrame(columns=columns)
-st.dataframe(data)
+
+# Initialize session state
+if "data" not in st.session_state:
+    st.session_state.data = pd.DataFrame(columns=[
+        'gender', 'course', 'study_hours', 'class_attendance',
+        'internet_access', 'sleep_hours', 'sleep_quality',
+        'study_method', 'facility_rating', 'exam_difficulty', 'exam_score'
+    ])
+
+# Create row
+input_data = pd.DataFrame([{
+    'gender': gender,
+    'course': course,
+    'study_hours': study_hours,
+    'class_attendance': class_attendance,
+    'internet_access': internet_access,
+    'sleep_hours': sleep_hours,
+    'sleep_quality': sleep_quality,
+    'study_method': study_method,
+    'facility_rating': facility_rating,
+    'exam_difficulty': exam_difficulty,
+    'exam_score': exam_score
+}])
+
+
+st.markdown("""
+    <style>
+    div.stButton > button:first-child {
+        background-color: #4CAF50;  /* Green background */
+        color: white;               /* White text */
+        height: 3em;
+        width: 100%;
+        border-radius: 10px;
+        margin-left:100%;
+        font-size: 16px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+# ✅ Create two columns for buttons
+col1, col2 = st.columns(2)
+
+with col1:
+    if st.button("Add Data", key="add_data_button"):
+        st.session_state.data.loc[len(st.session_state.data)] = input_data.iloc[0]
+
+with col2:
+    if st.button("Clear Table", key="clear_data_button"):
+        st.session_state.data = st.session_state.data.iloc[0:0]
+
+# Display table
+st.dataframe(st.session_state.data)
